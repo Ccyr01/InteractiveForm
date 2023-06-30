@@ -30,7 +30,20 @@ title.addEventListener("change", e => {
 // }
 shirtDesigns.addEventListener("change", e => {
     let eTarget = e.target.value;
-    if(eTarget !== 'js puns' || eTarget !=='heart js'){
-        alert(eTarget);
+    if(eTarget === 'js puns'){
+        color.hidden = false;
+        
+    }
+    else if(eTarget ==='heart js'){
+        color.hidden = false;
+    }
+})
+color.addEventListener("change", e => {
+    console.log(e.target);
+    if(e.target.value === 'darkslategrey'){
+        console.log(e.target.value);
+        console.log(e.target.data-theme);
+
+        console.log("true");
     }
 })
