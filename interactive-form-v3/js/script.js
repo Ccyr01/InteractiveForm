@@ -8,7 +8,7 @@ const title = document.getElementById("title");
 const color = document.getElementById("color");
 const shirtDesigns =document.getElementById("shirt-designs");
 const otherJobRole = document.getElementById("other-job-role");
-const option = document.getElementById("color").childNodes;
+const colorOptions = document.getElementById("color").childNodes;
 
 window.onload = () => {
     //on page load highlight the name box
@@ -32,20 +32,21 @@ title.addEventListener("change", e => {
 // }
 shirtDesigns.addEventListener("change", e => {
     let eTarget = e.target;
-    
+    // console.log(colorOptions.dataset.selected)
 
-    for(let i = 2; i < option.length; i++){
-        if(option[i].dataset){
-            option[i].hidden = false;
+    for(let i = 2; i < colorOptions.length; i++){
+        if([i].dataset){
+            colorOptions[i].hidden = false;
+            colorOptions[i].selected=false;
         }
     } 
     if(eTarget.value === 'js puns'){
         color.hidden = false;
-        for(let i = 2; i < option.length; i++){
-            if(option[i].dataset){
-                if(option[i].dataset.theme === 'heart js'){
+        for(let i = 2; i < colorOptions.length; i++){
+            if(colorOptions[i].dataset){
+                if(colorOptions[i].dataset.theme === 'heart js'){
                 
-                option[i].hidden = true;
+                colorOptions[i].hidden = true;
                 }
             }
         } 
@@ -53,11 +54,11 @@ shirtDesigns.addEventListener("change", e => {
         
     else if(eTarget.value ==='heart js'){
         color.hidden = false;
-        for(let i = 2; i < option.length; i++){
-            if(option[i].dataset){
-                if(option[i].dataset.theme === 'js puns'){
+        for(let i = 2; i < colorOptions.length; i++){
+            if(colorOptions[i].dataset){
+                if(colorOptions[i].dataset.theme === 'js puns'){
                 
-                option[i].hidden = true;
+                colorOptions[i].hidden = true;
                 
                 }
             }
