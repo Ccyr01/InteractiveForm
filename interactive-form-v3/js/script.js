@@ -15,7 +15,7 @@ window.onload = () => {
     name.focus();
     //keep job role hidden until event is changed
     otherJobRole.hidden = true;
-    color.hidden = true;
+    color.disabled = true;
 }
 title.addEventListener("change", e => {
     let eTarget = e.target.value;
@@ -33,10 +33,10 @@ title.addEventListener("change", e => {
 shirtDesigns.addEventListener("change", e => {
     let eTarget = e.target;
     // console.log(colorOptions.dataset.selected)
-
+    color.disabled = false;
     for(let i = 2; i < colorOptions.length; i++){
-        if([i].dataset){
-            colorOptions[i].hidden = false;
+        if(colorOptions[i].dataset){
+            colorOptions[i].hidden = true;
             colorOptions[i].selected=false;
         }
     } 
@@ -47,6 +47,9 @@ shirtDesigns.addEventListener("change", e => {
                 if(colorOptions[i].dataset.theme === 'heart js'){
                 
                 colorOptions[i].hidden = true;
+                }
+                else{
+                    colorOptions[i].hidden = false;
                 }
             }
         } 
@@ -60,6 +63,9 @@ shirtDesigns.addEventListener("change", e => {
                 
                 colorOptions[i].hidden = true;
                 
+                }
+                else{
+                    colorOptions[i].hidden = false;
                 }
             }
         }
