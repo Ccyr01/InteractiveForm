@@ -13,6 +13,7 @@ const otherJobRole = document.getElementById("other-job-role");
 const colorOptions = document.getElementById("color").childNodes;
 const fieldset = document.getElementById('activities');
 const acitvitiesCost = document.getElementById('activities-cost');
+const paymentMethods = document.getElementsByClassName('payment-methods');
 const payment = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
 const paypal = document.getElementById('paypal');
@@ -22,7 +23,26 @@ const ccnum = document.getElementById('cc-num');
 const zip = document.getElementById('zip');
 const cvvBox = document.getElementById('cvv');
 const form = document.querySelector('form');
-console.log(form);
+const activitiesBox = document.querySelectorAll('#activities-box input');
+// console.log(activitiesBox);
+// for(let i = 0; i < activitiesBox.length; i++){
+//     let checkboxName = activitiesBox[i].name;
+//     console.log(checkboxName);
+// }
+activitiesBox.forEach((checkbox) => {
+    checkbox.addEventListener('focus', (e) => {
+        // console.log("focused" + checkbox.name);
+        console.log("checkboxParent" + checkbox.parentNode);
+        checkbox.parentNode.classList.add('focus')
+    });
+
+    checkbox.addEventListener('blur', (e) => {
+        // console.log("blur" + checkbox.name);
+        checkbox.parentNode.classList.remove('focus')
+
+    });
+})
+
 
 //set credit card as default payment when screeen loads
 payment.children[1].setAttribute('selected', 'selected');
@@ -70,34 +90,100 @@ const cvvValidator = () => {
     return cvvIsValid;
 }
 
-
+//submit the form and if information is correct the page reloads
 form.addEventListener('submit', e => {
-    e.preventDefault();
-    // let eTarget = e.target.value;
+    // e.preventDefault();
+    let eTarget = e.target.value;
+    let parent = e.target.parentNode;
+    console.log(parent);
     console.log("activities: "+activities);
     if(activities == 0){
-        console.log('Please register for at least one activity.');
+        console.log('fieldset '+fieldset);
+        fieldset.lastElementChild.style.display = '';
+        fieldset.classList.add('not-valid');
+        fieldset.classList.remove('valid');
         e.preventDefault();
+    }
+    else{
+    
+        fieldset.lastElementChild.style.display = 'none';
+        fieldset.classList.add('valid');
+        fieldset.classList.remove('not-valid');
+
     }
     if(!nameValidator()){
         console.log('Invalid name prevented submission');
+        parent.classList.add('not-valid');
+        parent.classList.remove('valid');
+        console.log("parent.lastElementChild" +parent.lastElementChild);
+        parent.lastElementChild.style.display = '';
         e.preventDefault();
     }
+    else{
+        parent.classList.add('valid');
+        parent.classList.remove('not-valid');
+        parent.lastElementChild.style.display = 'none';
+
+    }
+    
     if(!emailValidator()){
         console.log('Invalid email prevented submission');
+        parent.classList.add('not-valid');
+        parent.classList.remove('valid');
+        console.log("parent.lastElementChild" +parent.lastElementChild);
+        parent.lastElementChild.style.display = '';
+
+
         e.preventDefault();
     }
+    else{
+        parent.classList.add('valid');
+        parent.classList.remove('not-valid');
+        parent.lastElementChild.style.display = 'none';
+
+    }
+
     if(!creditCardValidator()){
         console.log('Invalid Credit card prevented submission');
+        paymentMethods.classList.add('not-valid');
+        paymentMethods.classList.remove('valid');
+        console.log("parent.lastElementChild" +parent.lastElementChild);
+        paymentMethods.lastElementChild.style.display = '';
         e.preventDefault();
+    }
+    else{
+        paymentMethods.classList.add('valid');
+        paymentMethods.classList.remove('not-valid');
+        paymentMethods.lastElementChild.style.display = 'none';
+
     }
     if(!zipCodeValidator()){
         console.log('Invalid ZIP');
+        paymentMethods.classList.add('not-valid');
+        paymentMethods.classList.remove('valid');
+        console.log("paymentMethods.lastElementChild" +paymentMethods.lastElementChild);
+        paymentMethods.lastElementChild.style.display = '';
         e.preventDefault();
+    }
+    else{
+        paymentMethods.classList.add('valid');
+        paymentMethods.classList.remove('not-valid');
+        paymentMethods.lastElementChild.style.display = 'none';
+
     }
     if(!cvvValidator()){
         console.log('Invalid cvv');
+        paymentMethods.classList.add('not-valid');
+        paymentMethods.classList.remove('valid');
+        console.log("parent.lastElementChild" +paymentMethods.lastElementChild);
+        paymentMethods.lastElementChild.style.display = '';
         e.preventDefault();
+    }
+    else{
+        paymentMethods.classList.add('valid');
+        paymentMethods.classList.remove('not-valid');
+        paymentMethods.lastElementChild.style.display = 'none';
+
     }
 })
 //when payment type is changed hide the other two
