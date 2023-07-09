@@ -24,6 +24,8 @@ const zip = document.getElementById('zip');
 const cvvBox = document.getElementById('cvv');
 const form = document.querySelector('form');
 const activitiesBox = document.querySelectorAll('#activities-box input');
+const expMonth = document.getElementById('exp-month');
+const expYear = document.getElementById('exp-year');
 // console.log(activitiesBox);
 // for(let i = 0; i < activitiesBox.length; i++){
 //     let checkboxName = activitiesBox[i].name;
@@ -42,7 +44,10 @@ activitiesBox.forEach((checkbox) => {
 
     });
 })
-
+console.log(expMonth.value);
+expMonth.addEventListener('change',  e => {
+    console.log(e.target.value);
+})
 
 //set credit card as default payment when screeen loads
 payment.children[1].setAttribute('selected', 'selected');
@@ -74,7 +79,7 @@ const emailValidator = () => {
 }
 const creditCardValidator = () => {
     let creditCardValue = ccnum.value;
-    const ccIsValid = /(?:\d[ -]*?){13,16}/.test(creditCardValue);
+    const ccIsValid = /^\d{13,16}$/.test(creditCardValue);
     return ccIsValid;
 }
 const zipCodeValidator = () => {
@@ -101,7 +106,7 @@ function validStyler(element){
 }
 //submit the form and if information is correct the page reloads
 form.addEventListener('submit', e => {
-    // e.preventDefault();
+    e.preventDefault();
     console.log('here');
     let eTarget = e.target.value;
     // let parent = e.target.parentNode;
@@ -148,6 +153,20 @@ form.addEventListener('submit', e => {
     else{
         validStyler(cvvBox);
     }
+    if(expMonth.value == 'Select Date'){
+        e.preventDefault();
+        notValidStyler(expMonth);
+    }
+    else{
+        validStyler(expMonth);
+    }
+    if(expYear.value == 'Select Year'){
+        e.preventDefault();
+        notValidStyler(expYear);
+    }
+    else{
+        validStyler(expYear);
+    }
 })
 //when payment type is changed hide the other two
 payment.addEventListener('change', e => {
@@ -193,6 +212,9 @@ title.addEventListener("change", e => {
     // allow user to type text
     if(eTarget == "other"){
         otherJobRole.hidden = false;
+    }
+    else{
+        otherJobRole.hidden = true;
     }
 
 })
