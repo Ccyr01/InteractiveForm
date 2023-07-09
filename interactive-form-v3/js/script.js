@@ -121,6 +121,7 @@ form.addEventListener('submit', e => {
     if(!nameValidator()){
         e.preventDefault();
         notValidStyler(name);
+        document.getElementById('name-hint').innerText = "Please Enter Your Name";
     }
     else{
         validStyler(name);
