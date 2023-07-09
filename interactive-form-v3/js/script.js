@@ -89,101 +89,64 @@ const cvvValidator = () => {
     // console.log(`cvv validation test on "${cvvValue}" evaluates to ${cvvIsValid}`);
     return cvvIsValid;
 }
-
+function notValidStyler(element){
+    element.parentNode.classList.add('not-valid');
+    element.parentNode.classList.remove('valid');
+    element.parentNode.lastElementChild.style.display = '';
+}
+function validStyler(element){
+    element.parentNode.classList.add('valid');
+    element.parentNode.classList.remove('not-valid');
+    element.parentNode.lastElementChild.style.display = 'none';
+}
 //submit the form and if information is correct the page reloads
 form.addEventListener('submit', e => {
     // e.preventDefault();
+    console.log('here');
     let eTarget = e.target.value;
-    let parent = e.target.parentNode;
-    console.log(parent);
+    // let parent = e.target.parentNode;
     console.log("activities: "+activities);
     if(activities == 0){
-        console.log('fieldset '+fieldset);
-        fieldset.lastElementChild.style.display = '';
-        fieldset.classList.add('not-valid');
-        fieldset.classList.remove('valid');
         e.preventDefault();
+        notValidStyler(fieldset);
     }
     else{
-    
-        fieldset.lastElementChild.style.display = 'none';
-        fieldset.classList.add('valid');
-        fieldset.classList.remove('not-valid');
-
+        validStyler(fieldset);
     }
     if(!nameValidator()){
-        console.log('Invalid name prevented submission');
-        parent.classList.add('not-valid');
-        parent.classList.remove('valid');
-        console.log("parent.lastElementChild" +parent.lastElementChild);
-        parent.lastElementChild.style.display = '';
         e.preventDefault();
+        notValidStyler(name);
     }
     else{
-        parent.classList.add('valid');
-        parent.classList.remove('not-valid');
-        parent.lastElementChild.style.display = 'none';
-
+        validStyler(name);
     }
-    
     if(!emailValidator()){
-        console.log('Invalid email prevented submission');
-        parent.classList.add('not-valid');
-        parent.classList.remove('valid');
-        console.log("parent.lastElementChild" +parent.lastElementChild);
-        parent.lastElementChild.style.display = '';
-
-
         e.preventDefault();
+        notValidStyler(email);
     }
     else{
-        parent.classList.add('valid');
-        parent.classList.remove('not-valid');
-        parent.lastElementChild.style.display = 'none';
-
+        validStyler(email);
     }
-
     if(!creditCardValidator()){
-        console.log('Invalid Credit card prevented submission');
-        paymentMethods.classList.add('not-valid');
-        paymentMethods.classList.remove('valid');
-        console.log("parent.lastElementChild" +parent.lastElementChild);
-        paymentMethods.lastElementChild.style.display = '';
         e.preventDefault();
+        notValidStyler(ccnum);
     }
     else{
-        paymentMethods.classList.add('valid');
-        paymentMethods.classList.remove('not-valid');
-        paymentMethods.lastElementChild.style.display = 'none';
-
+        validStyler(ccnum);
     }
-    if(!zipCodeValidator()){
-        console.log('Invalid ZIP');
-        paymentMethods.classList.add('not-valid');
-        paymentMethods.classList.remove('valid');
-        console.log("paymentMethods.lastElementChild" +paymentMethods.lastElementChild);
-        paymentMethods.lastElementChild.style.display = '';
+    if(!zipCodeValidator()){       
         e.preventDefault();
+        notValidStyler(zip);
     }
     else{
-        paymentMethods.classList.add('valid');
-        paymentMethods.classList.remove('not-valid');
-        paymentMethods.lastElementChild.style.display = 'none';
-
+        validStyler(zip);
     }
     if(!cvvValidator()){
-        console.log('Invalid cvv');
-        paymentMethods.classList.add('not-valid');
-        paymentMethods.classList.remove('valid');
-        console.log("parent.lastElementChild" +paymentMethods.lastElementChild);
-        paymentMethods.lastElementChild.style.display = '';
         e.preventDefault();
+        notValidStyler(cvvBox);
     }
     else{
-        paymentMethods.classList.add('valid');
-        paymentMethods.classList.remove('not-valid');
-        paymentMethods.lastElementChild.style.display = 'none';
-
+        validStyler(cvvBox);
     }
 })
 //when payment type is changed hide the other two
