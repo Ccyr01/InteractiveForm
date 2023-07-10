@@ -11,7 +11,7 @@ const color = document.getElementById("color");
 const shirtDesigns =document.getElementById("shirt-designs");
 const otherJobRole = document.getElementById("other-job-role");
 const colorOptions = document.getElementById("color").childNodes;
-const fieldset = document.getElementById('activities');
+const fieldset = document.getElementById('activities-box');
 const acitvitiesCost = document.getElementById('activities-cost');
 const paymentMethods = document.getElementsByClassName('payment-methods');
 const payment = document.getElementById('payment');
@@ -114,6 +114,8 @@ form.addEventListener('submit', e => {
     if(activities == 0){
         e.preventDefault();
         notValidStyler(fieldset);
+        document.getElementById('activties-hint').style.display = 'block';
+
     }
     else{
         validStyler(fieldset);
@@ -121,7 +123,6 @@ form.addEventListener('submit', e => {
     if(!nameValidator()){
         e.preventDefault();
         notValidStyler(name);
-        document.getElementById('name-hint').textContent = "Please Enter Your Name";
         document.getElementById('name-hint').style.display = 'block';
     }
     else{
@@ -130,7 +131,6 @@ form.addEventListener('submit', e => {
     if(!emailValidator()){
         e.preventDefault();
         notValidStyler(email);
-        document.getElementById('email-hint').textContent = "Please Enter Your Email";
         document.getElementById('email-hint').style.display = 'block';
         
     }
@@ -175,6 +175,7 @@ form.addEventListener('submit', e => {
         notValidStyler(expMonth);
         let span = document.createElement("span");
         span.setAttribute("id", "month-hint");
+        expMonth.appendChild(span);
         document.getElementById('month-hint').textContent = "Please select month for expiration";
         document.getElementById('month-hint').style.display = 'block';
     }
