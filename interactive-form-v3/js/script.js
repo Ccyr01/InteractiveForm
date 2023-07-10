@@ -95,7 +95,7 @@ const cvvValidator = () => {
     return cvvIsValid;
 }
 function notValidStyler(element){
-    if(element == 'fieldset'){
+    if(element == fieldset){
         element.classList.add('not-valid');
         element.classList.remove('valid');
         console.log('fieldset');
@@ -107,7 +107,7 @@ function notValidStyler(element){
     }
 }
 function validStyler(element){
-    if(element == 'fieldset'){
+    if(element == fieldset){
         element.classList.add('valid');
         element.classList.remove('not-valid');
         console.log('fieldset');
