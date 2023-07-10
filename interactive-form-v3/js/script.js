@@ -121,7 +121,8 @@ form.addEventListener('submit', e => {
     if(!nameValidator()){
         e.preventDefault();
         notValidStyler(name);
-        document.getElementById('name-hint').innerText = "Please Enter Your Name";
+        document.getElementById('name-hint').textContent = "Please Enter Your Name";
+        document.getElementById('name-hint').style.display = 'block';
     }
     else{
         validStyler(name);
@@ -129,6 +130,9 @@ form.addEventListener('submit', e => {
     if(!emailValidator()){
         e.preventDefault();
         notValidStyler(email);
+        document.getElementById('email-hint').textContent = "Please Enter Your Email";
+        document.getElementById('email-hint').style.display = 'block';
+        
     }
     else{
         validStyler(email);
@@ -136,6 +140,10 @@ form.addEventListener('submit', e => {
     if(!creditCardValidator()){
         e.preventDefault();
         notValidStyler(ccnum);
+        let span = document.createElement("span");
+        span.setAttribute("id", "cc-hint");
+        document.getElementById('cc-hint').textContent = "Please Enter Your Credit Card Number";
+        document.getElementById('cc-hint').style.display = 'block';
     }
     else{
         validStyler(ccnum);
@@ -143,6 +151,10 @@ form.addEventListener('submit', e => {
     if(!zipCodeValidator()){       
         e.preventDefault();
         notValidStyler(zip);
+        let span = document.createElement("span");
+        span.setAttribute("id", "zip-hint");
+        document.getElementById('zip-hint').textContent = "Please Enter Your Zip Code";
+        document.getElementById('zip-hint').style.display = 'block';
     }
     else{
         validStyler(zip);
@@ -150,6 +162,10 @@ form.addEventListener('submit', e => {
     if(!cvvValidator()){
         e.preventDefault();
         notValidStyler(cvvBox);
+        let span = document.createElement("span");
+        span.setAttribute("id", "cvv-hint");
+        document.getElementById('cvv-hint').textContent = "Please Enter Your CVV on back of card";
+        document.getElementById('cvv-hint').style.display = 'block';
     }
     else{
         validStyler(cvvBox);
@@ -157,6 +173,10 @@ form.addEventListener('submit', e => {
     if(expMonth.value == 'Select Date'){
         e.preventDefault();
         notValidStyler(expMonth);
+        let span = document.createElement("span");
+        span.setAttribute("id", "month-hint");
+        document.getElementById('month-hint').textContent = "Please select month for expiration";
+        document.getElementById('month-hint').style.display = 'block';
     }
     else{
         validStyler(expMonth);
@@ -164,6 +184,11 @@ form.addEventListener('submit', e => {
     if(expYear.value == 'Select Year'){
         e.preventDefault();
         notValidStyler(expYear);
+        let span = document.createElement("span");
+        expYear.appendChild(span);
+        span.setAttribute("id", "year-hint");
+        document.getElementById('year-hint').textContent = "Please select year for expiration";
+        document.getElementById('year-hint').style.display = 'block';
     }
     else{
         validStyler(expYear);
