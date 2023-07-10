@@ -11,7 +11,7 @@ const color = document.getElementById("color");
 const shirtDesigns =document.getElementById("shirt-designs");
 const otherJobRole = document.getElementById("other-job-role");
 const colorOptions = document.getElementById("color").childNodes;
-const fieldset = document.getElementById('activities-box');
+const fieldset = document.getElementById('activities');
 const acitvitiesCost = document.getElementById('activities-cost');
 const paymentMethods = document.getElementsByClassName('payment-methods');
 const payment = document.getElementById('payment');
@@ -95,9 +95,16 @@ const cvvValidator = () => {
     return cvvIsValid;
 }
 function notValidStyler(element){
-    element.parentNode.classList.add('not-valid');
-    element.parentNode.classList.remove('valid');
-    element.parentNode.lastElementChild.style.display = '';
+    if(element == 'fieldset'){
+        element.classList.add('not-valid');
+        element.classList.remove('valid');
+        console.log('fieldset');
+    }
+    else{
+        element.parentNode.classList.add('not-valid');
+        element.parentNode.classList.remove('valid');
+        element.parentNode.lastElementChild.style.display = '';
+    }
 }
 function validStyler(element){
     element.parentNode.classList.add('valid');
