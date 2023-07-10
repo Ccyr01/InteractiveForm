@@ -107,9 +107,16 @@ function notValidStyler(element){
     }
 }
 function validStyler(element){
-    element.parentNode.classList.add('valid');
-    element.parentNode.classList.remove('not-valid');
-    element.parentNode.lastElementChild.style.display = 'none';
+    if(element == 'fieldset'){
+        element.classList.add('valid');
+        element.classList.remove('not-valid');
+        console.log('fieldset');
+    }
+    else{
+        element.parentNode.classList.add('valid');
+        element.parentNode.classList.remove('not-valid');
+        element.parentNode.lastElementChild.style.display = 'none';
+    }
 }
 //submit the form and if information is correct the page reloads
 form.addEventListener('submit', e => {
@@ -121,7 +128,7 @@ form.addEventListener('submit', e => {
     if(activities == 0){
         e.preventDefault();
         notValidStyler(fieldset);
-        document.getElementById('activties-hint').style.display = 'block';
+        document.getElementById('activities-hint').style.display = 'block';
 
     }
     else{
