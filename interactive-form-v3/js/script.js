@@ -26,6 +26,9 @@ const form = document.querySelector('form');
 const activitiesBox = document.querySelectorAll('#activities-box input');
 const expMonth = document.getElementById('exp-month');
 const expYear = document.getElementById('exp-year');
+//total cost initialized
+let totalCost = 0;
+let activities = 0;
 // console.log(activitiesBox);
 // for(let i = 0; i < activitiesBox.length; i++){
 //     let checkboxName = activitiesBox[i].name;
@@ -34,7 +37,6 @@ const expYear = document.getElementById('exp-year');
 activitiesBox.forEach((checkbox) => {
     checkbox.addEventListener('focus', (e) => {
         // console.log("focused" + checkbox.name);
-        console.log("checkboxParent" + checkbox.parentNode);
         checkbox.parentNode.classList.add('focus')
     });
 
@@ -44,16 +46,14 @@ activitiesBox.forEach((checkbox) => {
 
     });
 })
-console.log(expMonth.value);
 expMonth.addEventListener('change',  e => {
     console.log(e.target.value);
 })
 
 //set credit card as default payment when screeen loads
 payment.children[1].setAttribute('selected', 'selected');
-//total cost initialized
-let totalCost = 0;
-let activities = 0;
+
+
 
 //hide certain properties and focus on the name which is the first box
 window.onload = () => {
@@ -98,7 +98,6 @@ function notValidStyler(element){
     if(element == fieldset){
         element.classList.add('not-valid');
         element.classList.remove('valid');
-        console.log('fieldset');
     }
     else{
         element.parentNode.classList.add('not-valid');
@@ -110,7 +109,8 @@ function validStyler(element){
     if(element == fieldset){
         element.classList.add('valid');
         element.classList.remove('not-valid');
-        console.log('fieldset');
+        element.lastElementChild.style.display = 'none';
+
     }
     else{
         element.parentNode.classList.add('valid');
@@ -120,11 +120,8 @@ function validStyler(element){
 }
 //submit the form and if information is correct the page reloads
 form.addEventListener('submit', e => {
-    e.preventDefault();
-    console.log('here');
     let eTarget = e.target.value;
     // let parent = e.target.parentNode;
-    console.log("activities: "+activities);
     if(activities == 0){
         e.preventDefault();
         notValidStyler(fieldset);
@@ -151,62 +148,57 @@ form.addEventListener('submit', e => {
     else{
         validStyler(email);
     }
-    if(!creditCardValidator()){
-        e.preventDefault();
-        notValidStyler(ccnum);
-        let span = document.createElement("span");
-        span.setAttribute("id", "cc-hint");
-        document.getElementById('cc-hint').textContent = "Please Enter Your Credit Card Number";
-        document.getElementById('cc-hint').style.display = 'block';
-    }
-    else{
-        validStyler(ccnum);
-    }
-    if(!zipCodeValidator()){       
-        e.preventDefault();
-        notValidStyler(zip);
-        let span = document.createElement("span");
-        span.setAttribute("id", "zip-hint");
-        document.getElementById('zip-hint').textContent = "Please Enter Your Zip Code";
-        document.getElementById('zip-hint').style.display = 'block';
-    }
-    else{
-        validStyler(zip);
-    }
-    if(!cvvValidator()){
-        e.preventDefault();
-        notValidStyler(cvvBox);
-        let span = document.createElement("span");
-        span.setAttribute("id", "cvv-hint");
-        document.getElementById('cvv-hint').textContent = "Please Enter Your CVV on back of card";
-        document.getElementById('cvv-hint').style.display = 'block';
-    }
-    else{
-        validStyler(cvvBox);
-    }
-    if(expMonth.value == 'Select Date'){
-        e.preventDefault();
-        notValidStyler(expMonth);
-        let span = document.createElement("span");
-        span.setAttribute("id", "month-hint");
-        expMonth.appendChild(span);
-        document.getElementById('month-hint').textContent = "Please select month for expiration";
-        document.getElementById('month-hint').style.display = 'block';
-    }
-    else{
-        validStyler(expMonth);
-    }
-    if(expYear.value == 'Select Year'){
-        e.preventDefault();
-        notValidStyler(expYear);
-        let span = document.createElement("span");
-        expYear.appendChild(span);
-        span.setAttribute("id", "year-hint");
-        document.getElementById('year-hint').textContent = "Please select year for expiration";
-        document.getElementById('year-hint').style.display = 'block';
-    }
-    else{
-        validStyler(expYear);
+    if(payment.value == 'credit-card'){
+        if(!creditCardValidator()){
+            e.preventDefault();
+            notValidStyler(ccnum);
+            let span = document.createElement("span");
+            span.setAttribute("id", "cc-hint");
+            document.getElementById('cc-hint').textContent = "Please Enter Your Credit Card Number";
+            document.getElementById('cc-hint').style.display = 'block';
+        }
+        else{
+            validStyler(ccnum);
+        }
+        if(!zipCodeValidator()){       
+            e.preventDefault();
+            notValidStyler(zip);
+            let span = document.createElement("span");
+            span.setAttribute("id", "zip-hint");
+            document.getElementById('zip-hint').textContent = "Please Enter Your Zip Code";
+            document.getElementById('zip-hint').style.display = 'block';
+        }
+        else{
+            validStyler(zip);
+        }
+        if(!cvvValidator()){
+            e.preventDefault();
+            notValidStyler(cvvBox);
+            let span = document.createElement("span");
+            span.setAttribute("id", "cvv-hint");
+            document.getElementById('cvv-hint').textContent = "Please Enter Your CVV on back of card";
+            document.getElementById('cvv-hint').style.display = 'block';
+        }
+        else{
+            validStyler(cvvBox);
+        }
+        if(expMonth.value == 'Select Date'){
+            e.preventDefault();
+            notValidStyler(expMonth)
+            
+        }
+        else{
+            validStyler(expMonth);
+        }
+        if(expYear.value == 'Select Year'){
+            e.preventDefault();
+            notValidStyler(expYear);
+            
+        }
+        else{
+            validStyler(expYear);
+
+        }
     }
 })
 //when payment type is changed hide the other two
