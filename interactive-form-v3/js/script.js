@@ -94,6 +94,8 @@ const cvvValidator = () => {
     // console.log(`cvv validation test on "${cvvValue}" evaluates to ${cvvIsValid}`);
     return cvvIsValid;
 }
+//function adds the class for the not-valid style, so
+// the user could tell what they are missing from the form
 function notValidStyler(element){
     if(element == fieldset){
         element.classList.add('not-valid');
@@ -109,6 +111,7 @@ function notValidStyler(element){
         element.parentNode.lastElementChild.style.display = '';
     }
 }
+// function adds style for a valid filled in portion of form
 function validStyler(element){
     if(element == fieldset){
         element.classList.add('valid');
@@ -129,7 +132,8 @@ function validStyler(element){
 //submit the form and if information is correct the page reloads
 form.addEventListener('submit', e => {
     let eTarget = e.target.value;
-    // let parent = e.target.parentNode;
+
+    //ACTIVITIES VALIDATOR
     if(activities == 0){
         e.preventDefault();
         notValidStyler(fieldset);
@@ -139,6 +143,8 @@ form.addEventListener('submit', e => {
     else{
         validStyler(fieldset);
     }
+
+    //NAME VALIDATOR
     if(!nameValidator()){
         e.preventDefault();
         notValidStyler(name);
@@ -147,6 +153,8 @@ form.addEventListener('submit', e => {
     else{
         validStyler(name);
     }
+
+    //EMAIL VALIDATOR
     if(!emailValidator()){
         e.preventDefault();
         notValidStyler(email);
@@ -156,6 +164,8 @@ form.addEventListener('submit', e => {
     else{
         validStyler(email);
     }
+
+    //if payment is valid additional checks made
     if(payment.value == 'credit-card'){
         if(!creditCardValidator()){
             e.preventDefault();
@@ -190,25 +200,27 @@ form.addEventListener('submit', e => {
         else{
             validStyler(cvvBox);
         }
-        if(expMonth.value == 'Select Date'){
-            e.preventDefault();
-            notValidStyler(expMonth)
+        //Only if expiration month and year was required I could add to this
+        // if(expMonth.value == 'Select Date'){
+        //     e.preventDefault();
+        //     notValidStyler(expMonth)
             
-        }
-        else{
-            validStyler(expMonth);
-        }
-        if(expYear.value == 'Select Year'){
-            e.preventDefault();
-            notValidStyler(expYear);
+        // }
+        // else{
+        //     validStyler(expMonth);
+        // }
+        // if(expYear.value == 'Select Year'){
+        //     e.preventDefault();
+        //     notValidStyler(expYear);
             
-        }
-        else{
-            validStyler(expYear);
+        // }
+        // else{
+        //     validStyler(expYear);
 
-        }
+        // }
     }
 })
+
 //when payment type is changed hide the other two
 payment.addEventListener('change', e => {
     let eTarget = e.target;
@@ -229,6 +241,7 @@ payment.addEventListener('change', e => {
         bitcoin.hidden = true;
     }
 })
+
 //add up correct cost based on checked boxes
 fieldset.addEventListener("change", e => {
     let eTarget = e.target;
@@ -246,6 +259,7 @@ fieldset.addEventListener("change", e => {
     }
 
 })
+
 //display extra box for user to type into if the other option is selected 
 title.addEventListener("change", e => {
     let eTarget = e.target.value;
@@ -259,6 +273,7 @@ title.addEventListener("change", e => {
     }
 
 })
+
 //based off designs change the color dropdown
 shirtDesigns.addEventListener("change", e => {
     let eTarget = e.target;
