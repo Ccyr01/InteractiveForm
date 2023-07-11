@@ -99,6 +99,10 @@ function notValidStyler(element){
         element.classList.add('not-valid');
         element.classList.remove('valid');
     }
+    else if(element == expMonth || element == expYear){
+        element.classList.add('not-valid');
+        element.classList.remove('valid');
+    }
     else{
         element.parentNode.classList.add('not-valid');
         element.parentNode.classList.remove('valid');
@@ -111,6 +115,10 @@ function validStyler(element){
         element.classList.remove('not-valid');
         element.lastElementChild.style.display = 'none';
 
+    }
+    else if(element == expMonth || element == expYear){
+        element.classList.add('valid');
+        element.classList.remove('not-valid');
     }
     else{
         element.parentNode.classList.add('valid');
