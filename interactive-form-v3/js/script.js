@@ -279,6 +279,10 @@ shirtDesigns.addEventListener("change", e => {
     let eTarget = e.target;
     // console.log(colorOptions.dataset.selected)
     color.disabled = false;
+
+    // 'Now Select A Color' shows up because you already picked a design;
+    colorOptions[1].innerHTML = 'Now Pick a Color!';
+
     for(let i = 2; i < colorOptions.length; i++){
         if(colorOptions[i].dataset){
             colorOptions[i].hidden = true;
